@@ -1,0 +1,30 @@
+.banner {
+  height: 60px;
+  width: 100%;
+  background-color: #242424;
+  display: flex;
+  color: white;
+  align-items: center;
+  justify-content: space-between;
+}
+.banner h1 {
+  margin: 0;
+  padding-left: 10px;
+  font-size: 1.5rem;
+}
+
+.nav {
+  display: flex;
+  gap: 10px;
+  padding-right: 40px;
+}
+
+.nav-link {
+  color: white;
+  font-size: 1rem;
+}
+
+.nav-link:hover {
+  opacity: 70%;
+  transform: scale(0.95);
+}
