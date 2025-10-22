@@ -8,13 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -37,10 +38,11 @@ public class UserService {
 
     public String deleteUser(UUID id) {
         try {
+            String name = userRepository.findById(id).get().getFirstName();
             userRepository.deleteById(id);
-            return "User deleted successfully";
+            return "User "+ name + " deleted successfully!";
         }
-        catch (EmptyResultDataAccessException e) {
+        catch (EmptyResultDataAccessException | NoSuchElementException e) {
             return "User not found";
         }
     }
