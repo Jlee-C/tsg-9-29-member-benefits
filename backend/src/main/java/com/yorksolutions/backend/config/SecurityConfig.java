@@ -1,5 +1,6 @@
 package com.yorksolutions.backend.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -7,6 +8,9 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import java.util.List;
+
+@Slf4j
 @Configuration
 public class SecurityConfig {
 
@@ -35,7 +39,9 @@ public class SecurityConfig {
     @Bean
     public AuthenticationSuccessHandler successHandler() {
         return (request, response, authentication) -> {
-            response.sendRedirect("http://localhost:5137/dashboard");
+            response.sendRedirect("http://localhost:5173/dashboard");
+            log.info("<------------------------- Success Handler ------------------------------>");
+            log.info(String.valueOf(response));
         };
     }
 
