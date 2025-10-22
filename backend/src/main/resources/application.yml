@@ -1,4 +1,6 @@
 spring:
+  config:
+    import: "optional:file:.env[.properties]"
   security:
     user:
       password: test
@@ -7,8 +9,8 @@ spring:
 #      client:
 #        registration:
 #          google:
-#            client-id: YOUR_CLIENT_ID
-#            client-secret: YOUR_CLIENT_SECRET
+#            client-id: ${GOOGLE_CLIENT_ID}
+#            client-secret: ${GOOGLE_CLIENT_SECRET}
 #            scope:
 #              - openid
 #              - profile
