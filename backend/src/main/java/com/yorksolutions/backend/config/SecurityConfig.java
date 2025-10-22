@@ -16,7 +16,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) // So I don't have to mess with csrf tokens for the mean time
                 .cors(cors -> {})
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/public/**", "/login/**", "/error").permitAll()
+                        .requestMatchers("/","/api/public/**", "/login/**", "/error").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth2 -> oauth2
