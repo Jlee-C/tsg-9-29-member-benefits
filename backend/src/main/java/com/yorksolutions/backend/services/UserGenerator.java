@@ -4,8 +4,6 @@ import com.yorksolutions.backend.entities.User;
 import com.yorksolutions.backend.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -38,8 +36,9 @@ public class UserGenerator {
             int lNum = ThreadLocalRandom.current().nextInt(0, lastNames.length);
             String firstName = firstNames[fNum];
             String lastName = lastNames[lNum];
+            log.info("Attempting to generate random user #" + firstName + " " + lastName);
             User user = new User(firstName, lastName);
-            log.info("Generated {} user {}, expected: {} times", fNum, lastName, numberOfUsers);
+            log.info("Generated user {}, expected: {} times", lastName, numberOfUsers);
             userRepository.save(user);
         }
     }

@@ -1,4 +1,21 @@
 spring:
+  security:
+    user:
+      password: test
+      name: test
+  #    oauth2:
+#      client:
+#        registration:
+#          google:
+#            client-id: YOUR_CLIENT_ID
+#            client-secret: YOUR_CLIENT_SECRET
+#            scope:
+#              - openid
+#              - profile
+#              - email
+#        provider:
+#          google:
+#            issuer-uri: https://accounts.google.com
   application:
     name: backend
 
@@ -14,3 +31,11 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+server:
+  port: 8080
+
+logging:
+  file:
+    path: C:\Users\02jos\York\Week 3-4\tsg-9-29-member-benefits\backend
+    name: backend.log
