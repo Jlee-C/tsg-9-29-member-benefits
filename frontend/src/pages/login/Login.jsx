@@ -1,24 +1,12 @@
-
-import { GoogleLogin } from "@react-oauth/google";
-
 export default function Login() {
-  return (
-  <>
-  <h1>Login</h1>
-  <main>
-    <div className="login-box">
+  function handleLogin() {
+    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+  }
 
-      <GoogleLogin
-      ux_mode="popup"
-      onSuccess={(credentialResponse) => {
-       console.log(credentialResponse);
-        }}
-      onError={() => {
-        console.log('Login Failed');
-      }}    
-      />
+  return (
+    <div className="login-page">
+      <h1>Sign in</h1>
+      <button onClick={handleLogin}>Sign in with Google</button>
     </div>
-  </main>
-  </>
   );
 }
