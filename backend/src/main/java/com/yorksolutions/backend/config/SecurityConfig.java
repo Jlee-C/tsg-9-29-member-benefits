@@ -5,11 +5,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
-import org.springframework.security.oauth2.core.OAuth2TokenValidator;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.oauth2.jwt.*;
-
+import org.springframework.web.cors.CorsConfigurationSource;
 
 
 @Slf4j
@@ -17,18 +16,20 @@ import org.springframework.security.oauth2.jwt.*;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtDecoder jwtDecoder) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http,JwtDecoder jwtDecoder, CorsConfigurationSource corsConfigurationSource) throws Exception {
         http
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/api/**").authenticated()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
+                .cors(cors -> cors.configurationSource(corsConfigurationSource))
+                .csrf(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(oauth -> oauth.jwt(Customizer.withDefaults()));
 
         return http.build();
     }
 
-    // just realized spring does this for you
+    // Keeping this code for reference
 //    @Bean
 //    protected JwtDecoder jwtDecoder() {
 //        NimbusJwtDecoder decoder = NimbusJwtDecoders.fromOidcIssuerLocation("https://accounts.google.com");

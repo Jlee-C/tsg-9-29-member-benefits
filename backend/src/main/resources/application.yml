@@ -11,17 +11,6 @@ spring:
           issuer-uri: https://accounts.google.com
           audiences:
             - ${GOOGLE_CLIENT_ID}
-#        registration:
-#          google:
-#            client-id: ${GOOGLE_CLIENT_ID}
-#            client-secret: ${GOOGLE_CLIENT_SECRET}
-#            scope:
-#              - openid
-#              - profile
-#              - email
-#        provider:
-#          google:
-#            issuer-uri: https://accounts.google.com
   application:
     name: backend
 
