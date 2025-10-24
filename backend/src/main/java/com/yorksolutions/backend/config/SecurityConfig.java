@@ -4,45 +4,41 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2TokenValidator;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.oauth2.jwt.*;
 
-import java.util.List;
+
 
 @Slf4j
 @Configuration
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtDecoder jwtDecoder) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable) // So I don't have to mess with csrf tokens for the mean time
-                .cors(cors -> {})
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/","/api/public/**", "/login/**", "/error").permitAll()
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                        .requestMatchers("/api/**").authenticated()
                         .anyRequest().authenticated()
                 )
-                .oauth2Login(oauth2 -> oauth2
-                        .successHandler(successHandler()) // successHandler for routing to dashboard
-                )
-                .logout(logout -> logout
-                        .logoutUrl("/api/auth/logout")
-                        .deleteCookies("JSESSIONID")
-                        .logoutSuccessHandler((req, resp, auth) -> resp.setStatus(200))
-                );
+                .oauth2ResourceServer(oauth -> oauth.jwt(jwt -> jwt.decoder(jwtDecoder)));
 
         return http.build();
     }
 
-    // Redirects to React dashboard
     @Bean
-    public AuthenticationSuccessHandler successHandler() {
-        return (request, response, authentication) -> {
-            response.sendRedirect("http://localhost:5173/dashboard");
-            log.info("<------------------------- Success Handler ------------------------------>");
-            log.info(String.valueOf(response));
-        };
+    protected JwtDecoder jwtDecoder() {
+        JwtDecoder decoder = JwtDecoders.fromOidcIssuerLocation("https://accounts.google.com");
+
+        OAuth2TokenValidator<Jwt> validator =
+                new DelegatingOAuth2TokenValidator<>(
+                        new JwtTimestampValidator(),
+                        new JwtIssuerValidator("https://accounts.google.com"),
+                        new JwtAudienceValidator(googleClientId)
+                );
+        decoder.setJwtValidator(validator);
+        return decoder;
     }
 
 }
