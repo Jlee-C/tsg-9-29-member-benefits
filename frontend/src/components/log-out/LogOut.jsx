@@ -1,14 +1,9 @@
-import { auth } from "@/utils/auth";
+import "./LogOut.css";
 
-export default function LogOut() {
+export default function LogOut({ logout }) {
   return (
-    <button
-      onClick={() => {
-        auth.clear();
-        console.log("Logging Out");
-      }}
-    >
-      Log Out
+    <button onClick={logout} className="logout">
+      Sign out
     </button>
   );
 }

@@ -9,8 +9,9 @@ export default function Login({ onLogIn }) {
   const [errorMesg, setErrorMesg] = useState("");
   const navigate = useNavigate();
   return (
-    <page className="page">
+    <section className="page">
       <div className="login-page">
+        <h1>Log in</h1>
         <GoogleLogin
           ux_mode="popup"
           onSuccess={(credentialResponse) => {
@@ -29,6 +30,6 @@ export default function Login({ onLogIn }) {
         />
         {errorMesg ? <span>{errorMesg}</span> : null}
       </div>
-    </page>
+    </section>
   );
 }

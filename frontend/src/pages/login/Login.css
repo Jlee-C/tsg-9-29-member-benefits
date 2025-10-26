@@ -1,10 +1,35 @@
 .page {
-  display: grid;
-  place-items: center;
-  height: 100vh;
+  height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
 }
 
 .login-page {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 300px;
+  height: 600px;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 12px;
+
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.login-page h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: black;
+}
+
+.login-page span {
+  margin-top: 1rem;
+  color: red;
+  font-size: 0.9rem;
 }

@@ -13,7 +13,8 @@
   font-size: 1.5rem;
 }
 
-.nav {
+.nav,
+.nav > section {
   display: flex;
   gap: 10px;
   padding-right: 40px;

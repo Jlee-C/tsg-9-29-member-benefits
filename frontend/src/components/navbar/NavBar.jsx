@@ -3,28 +3,35 @@ import "./Navbar.css";
 import LogOut from "../log-out/LogOut";
 import { auth } from "@/utils/auth";
 
-export default function NavBar(claims) {
+export default function NavBar(props) {
+  const user = { ...props.claims };
+  const logout = props.logout;
+  console.log(props);
   return (
     <header className="banner">
       <h1>Member Benefits</h1>
-      {claims.name ? <span>{claims.name}</span> : null}
+      {user.name ? <span>{user.name}</span> : null}
       <nav className="nav">
-        <Link to={"/"} className="nav-link">
-          Home
-        </Link>
-        <Link to={"dashboard"} className="nav-link">
-          Dashboard
-        </Link>
-        <Link to={"claims"} className="nav-link">
-          Claims
-        </Link>
-        {auth.token ? <LogOut /> : null}
-        {claims.picture ? (
-          <img
-            className="profile-picture"
-            src={claims.picture}
-            alt="Profile picture"
-          />
+        {auth.token ? null : (
+          <Link to={"/"} className="nav-link">
+            Home
+          </Link>
+        )}
+        {auth.token ? (
+          <section>
+            <Link to={"dashboard"} className="nav-link">
+              Dashboard
+            </Link>
+            <Link to={"claims"} className="nav-link">
+              Claims
+            </Link>
+            <LogOut logout={logout} />
+            <img
+              className="profile-picture"
+              src={user.picture}
+              alt="Profile picture"
+            />
+          </section>
         ) : null}
       </nav>
     </header>

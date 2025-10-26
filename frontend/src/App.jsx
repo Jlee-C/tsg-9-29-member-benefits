@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import { useState } from "react";
 import NavBar from "./components/navbar/NavBar";
 import Login from "./pages/login/Login";
@@ -7,19 +7,33 @@ import Claims from "./pages/claims/Claims";
 import ClaimsList from "./components/claims/claims-list/ClaimsList";
 import ClaimDetails from "./components/claims/claim-details/ClaimDetails";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
+import NotFound from "./pages/not-found/NotFound";
+import { googleLogout } from "@react-oauth/google";
+import { auth } from "@/utils/auth";
+import { useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
+
 export default function App() {
-  const [name, setName] = useState("");
-  const [picture, setPicture] = useState("");
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    setUser(auth.token ? jwtDecode(auth.token) : null);
+  }, []);
 
   function onLogIn(claims) {
-    console.log("--In onLogIn--");
-    setPicture(() => claims.picture);
-    setName(() => claims.name);
+    setUser(claims);
+  }
+
+  function logout() {
+    auth.clear();
+    googleLogout();
+    setUser(null);
+    Navigate("dashboard");
   }
 
   return (
     <BrowserRouter>
-      <NavBar name={name} picture={picture} />
+      <NavBar claims={user} logout={logout} />
       <Routes>
         <Route path="/" element={<Login onLogIn={onLogIn} />} />
         <Route element={<ProtectedRoutes />}>
@@ -29,6 +43,7 @@ export default function App() {
             <Route path="claim-details" element={<ClaimDetails />} />
           </Route>
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
