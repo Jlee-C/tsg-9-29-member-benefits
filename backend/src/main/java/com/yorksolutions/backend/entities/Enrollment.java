@@ -14,7 +14,7 @@ import java.util.UUID;
 @Builder
 public class Enrollment {
     @Id
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
