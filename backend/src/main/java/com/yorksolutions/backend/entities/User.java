@@ -12,7 +12,7 @@ import java.util.UUID;
 
  @Entity
  @Table(name = "users")
- @EntityListeners((AuditingEntityListener.class))
+ @EntityListeners(AuditingEntityListener.class)
  @Getter @Setter
 @NoArgsConstructor
 public class User {
