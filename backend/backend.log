@@ -496,3 +496,8 @@ Caused by: org.springframework.data.mapping.PropertyReferenceException: No prope
 2025-10-27T00:29:05.473-05:00  INFO 92749 --- [backend] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
 2025-10-27T00:29:05.499-05:00  INFO 92749 --- [backend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
 2025-10-27T00:29:05.506-05:00  INFO 92749 --- [backend] [restartedMain] c.y.backend.BackendApplication           : Started BackendApplication in 3.674 seconds (process running for 9.19)
+2025-10-27T00:43:16.756-05:00  INFO 92749 --- [backend] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-27T00:43:16.758-05:00  INFO 92749 --- [backend] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-27T00:43:16.763-05:00  INFO 92749 --- [backend] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-27T00:43:16.765-05:00  INFO 92749 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-27T00:43:16.766-05:00  INFO 92749 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
