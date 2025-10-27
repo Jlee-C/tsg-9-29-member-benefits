@@ -25,7 +25,7 @@ public class Claim {
     private String claimNumber;     // human-friendly key for UI
 
     @Column(name="member_id")
-    private UUID memberID;
+    private UUID memberId;
 
 //    @ManyToOne(optional = false)
 //    @JoinColumn(name="provider_id")

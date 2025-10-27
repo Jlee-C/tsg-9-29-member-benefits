@@ -39,7 +39,7 @@ public class ClaimsGenerator {
         LocalDate date = between(member.getDateOfBirth().plusDays(6570), LocalDate.now().minusDays(1));
         Claim claim = Claim.builder()
                 .claimNumber("c-"+randomNumber(1,999))
-                .memberID(member.getId())
+                .memberId(member.getId())
                 .serviceStartDate(date)
                 .serviceEndDate(date.plusDays(randomNumber(1,365)))
                 .receivedDate(date.minusDays(randomNumber(1,10)))

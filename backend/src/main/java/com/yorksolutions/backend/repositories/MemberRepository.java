@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface MemberRepository extends JpaRepository<Member, UUID> {
     Optional<Member> findByUser_Id(UUID userId);
+    Optional<Member> findByUser_authSub(String authSub);
 }

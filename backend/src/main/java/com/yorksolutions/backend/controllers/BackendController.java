@@ -17,10 +17,13 @@ public class BackendController {
 
     @PostMapping("/user")
     public ResponseEntity<?> createUser(@RequestBody Member member) {
-        if(userRepository.findByAuthSub(member.getUser().getAuthSub()).isPresent()) {
+        if(userRepository.findByAuthSub(member.getUser().getAuthSub()).isEmpty()) {
             dataSeeder.generateData(member);
+            return ResponseEntity.ok("User created successfully: " + member.getId());
         }
-            return ResponseEntity.ok(member);
+        else{
+            return ResponseEntity.ok("User already exists: " + member.getUser().getAuthSub());
+        }
     }
 
 }
