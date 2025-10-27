@@ -8,6 +8,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface ClaimRepository extends JpaRepository<Claim, UUID> {
-    List<Claim> findByProvider_Id(UUID providerId);
-    Optional<Claim> findByClaimNumber(String claimNumber);
+//    List<Claim> findByProvider_Id(UUID providerId);
+      Optional<Claim> findByClaimNumber(String claimNumber);
 }

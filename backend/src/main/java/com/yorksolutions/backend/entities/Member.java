@@ -15,11 +15,11 @@ import java.util.UUID;
 public class Member {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @OneToOne(optional = false)
-    @MapsId
-    @JoinColumn(name = "id", nullable = false)
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(nullable = false, referencedColumnName = "id")
     private User user;
 
     private String firstName;

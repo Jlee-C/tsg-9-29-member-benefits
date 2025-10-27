@@ -24,11 +24,12 @@ public class Claim {
 
     private String claimNumber;     // human-friendly key for UI
 
-    @ManyToOne(optional = false)
-    private Member member;          // FK: member_id
+    @Column(name="member_id")
+    private UUID memberID;
 
-    @ManyToOne(optional = false)
-    private Provider provider;      // FK: provider_id
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name="provider_id")
+//    private Provider provider;      // FK: provider_id
 
     private LocalDate serviceStartDate;
     private LocalDate serviceEndDate;
