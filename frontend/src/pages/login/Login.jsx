@@ -18,7 +18,7 @@ export default function Login({ onLogIn }) {
             const idToken = credentialResponse.credential;
             const claims = jwtDecode(idToken);
             auth.token = idToken;
-            console.log("Credentials: ok! Claims: ", claims);
+            console.log("Token: "+ idToken);
             setErrorMesg("");
             onLogIn?.(claims);
             navigate("/dashboard");
