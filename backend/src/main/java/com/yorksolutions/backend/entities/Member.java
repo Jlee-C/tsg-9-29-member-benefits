@@ -26,6 +26,6 @@ public class Member {
     private String lastName;
     private LocalDate dateOfBirth;
 
-    @Embedded
-    private Address mailingAddress;
+//    @Embedded
+//    private Address mailingAddress;
 }
