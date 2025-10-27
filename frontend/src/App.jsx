@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import NavBar from "./components/navbar/NavBar";
 import Login from "./pages/login/Login";
@@ -15,6 +15,7 @@ import { jwtDecode } from "jwt-decode";
 
 export default function App() {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setUser(auth.token ? jwtDecode(auth.token) : null);
@@ -28,11 +29,11 @@ export default function App() {
     auth.clear();
     googleLogout();
     setUser(null);
-    Navigate("dashboard");
+    navigate("/", { replace: true });
   }
 
   return (
-    <BrowserRouter>
+    <>
       <NavBar claims={user} logout={logout} />
       <Routes>
         <Route path="/" element={<Login onLogIn={onLogIn} />} />
@@ -45,6 +46,6 @@ export default function App() {
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }

@@ -1,6 +1,6 @@
 import { GoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { auth } from "@/utils/auth";
 import { jwtDecode } from "jwt-decode";
 import "./Login.css";
@@ -18,7 +18,7 @@ export default function Login({ onLogIn }) {
             const idToken = credentialResponse.credential;
             const claims = jwtDecode(idToken);
             auth.token = idToken;
-            console.log("Token: "+ idToken);
+            console.log("Token: " + idToken);
             setErrorMesg("");
             onLogIn?.(claims);
             navigate("/dashboard");

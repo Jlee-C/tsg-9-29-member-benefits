@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 import LogOut from "../log-out/LogOut";
 import { auth } from "@/utils/auth";
@@ -6,7 +6,6 @@ import { auth } from "@/utils/auth";
 export default function NavBar(props) {
   const user = { ...props.claims };
   const logout = props.logout;
-  console.log(props);
   return (
     <header className="banner">
       <h1>Member Benefits</h1>
